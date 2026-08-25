@@ -1,0 +1,4 @@
+replicas: 3
+env:
+  ORDERS_SERVICE_URL: http://orders-service.app-net.svc
+  CHECKOUT_SERVICE_URL: http://checkout-service.app-net.svc
