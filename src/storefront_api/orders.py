@@ -13,3 +13,11 @@ def reserve_stock(settings, basket):  # calls orders-service
 
 def authorise_payment(settings, reservation):  # calls payment-gateway
     ...
+
+
+def confirmation(order: dict) -> dict:
+    return {**order, "estimated_delivery": estimate_delivery(order)}
+
+
+def estimate_delivery(order):
+    ...
