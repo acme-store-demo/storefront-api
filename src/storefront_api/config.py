@@ -1,7 +1,9 @@
 """Runtime settings, read from deploy/values-*.yaml at start-up."""
 import os
 
-DEFAULT_PAYMENT_CAPTURE_MODE = "authorize_then_capture"
+
+class MissingConfigError(RuntimeError):
+    """A required setting is absent; there is no default to fall back on."""
 
 
 class Settings:
@@ -11,4 +13,7 @@ class Settings:
 
     @property
     def payment_capture_mode(self) -> str:
-        return os.environ.get("PAYMENT_CAPTURE_MODE", DEFAULT_PAYMENT_CAPTURE_MODE)
+        value = os.environ.get("PAYMENT_CAPTURE_MODE")
+        if not value:
+            raise MissingConfigError("payment_capture_mode is required but not set")
+        return value
